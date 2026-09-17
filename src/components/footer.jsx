@@ -330,7 +330,7 @@ function InstagramIcon() {
 function Logo() {
   return (
     <picture>
-      <source srcSet="/logo-dark.png" media="(prefers-color-scheme: dark)" />
+      <source srcSet="/logo.png" media="(prefers-color-scheme: dark)" />
       <img
         src="/logo.png"
         alt="Manaja"
