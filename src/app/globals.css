@@ -1,49 +1,153 @@
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@import "tailwindcss";
+
+@custom-variant dark (&:is(.dark *));
+
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Brand palette (light mode) */
+  --background: #f6f7f9;
+  --foreground: #16213e;
+  --card: #ffffff;
+  --card-foreground: #16213e;
+  --primary: #1a4c9e;
+  --primary-foreground: #ffffff;
+  --secondary: #16213e;
+  --secondary-foreground: #ffffff;
+  --accent: #f5b70c;
+  --accent-foreground: #16213e;
+  --muted: #f1f3f6;
+  --muted-foreground: #5b6472;
+  --border: #e7e9ee;
+  --ring: #1a4c9e;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --champagne: #d8c18d;
+  --champagne-foreground: #ffffff;
+  --charcoal: #20272b;
+  --charcoal-foreground: #ffffff;
+  --hero-panel: #eef3f7;
+  --hero-panel-foreground: #20272b;
+}
+
+.dark {
+  /* Brand palette (dark mode) */
+  --background: #0d1117;
+  --foreground: #e6edf3;
+  --card: #161b22;
+  --card-foreground: #e6edf3;
+  --primary: #f5b70c;
+  --primary-foreground: #16213e;
+  --secondary: #1a4c9e;
+  --secondary-foreground: #ffffff;
+  --accent: #f5b70c;
+  --accent-foreground: #16213e;
+  --muted: #1a2029;
+  --muted-foreground: #8b949e;
+  --border: #30363d;
+  --ring: #f5b70c;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --champagne: #d8c18d;
+  --champagne-foreground: #20272b;
+  --charcoal: #0f1418;
+  --charcoal-foreground: #ffffff;
+  --hero-panel: #131c22;
+  --hero-panel-foreground: #e6edf3;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-champagne: var(--champagne);
+  --color-champagne-foreground: var(--champagne-foreground);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-foreground: var(--charcoal-foreground);
+  --color-hero-panel: var(--hero-panel);
+  --color-hero-panel-foreground: var(--hero-panel-foreground);
+
+  --font-serif: "Playfair Display", ui-serif, Georgia, Cambria,
+    "Times New Roman", Times, serif;
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
-html {
-  height: 100%;
-}
+@media print {
+  /* Hide site chrome */
+  header,
+  footer,
+  nav,
+  aside,
+  button,
+  [data-print-hide] {
+    display: none !important;
+  }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
-}
+  /* Expand main content to full width */
+  main,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #fff !important;
+    color: #000 !important;
+  }
 
-body {
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  /* Remove shadows / borders that don't render well */
+  * {
+    box-shadow: none !important;
+    border-color: #ccc !important;
+    background: transparent !important;
+    color: #000 !important;
+  }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+  /* Page breaks */
+  section {
+    break-inside: avoid;
+  }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
+  /* Links — show URL after text */
+  a[href]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.75em;
+    color: #666;
+  }
 
-@media (prefers-color-scheme: dark) {
-  html {
-    color-scheme: dark;
+  /* But don't do that for internal anchors */
+  a[href^="/"]::after {
+    content: "";
+  }
+
+  /* Images: keep them, cap size */
+  img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
   }
 }
