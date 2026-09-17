@@ -1,6 +1,5 @@
 const RAW_BASE = process.env.API_BASE_URL;
 
-// Strip trailing slashes so `${API_BASE}/listings` never becomes `//listings`
 const API_BASE = RAW_BASE ? RAW_BASE.replace(/\/+$/, "") : null;
 
 /**
