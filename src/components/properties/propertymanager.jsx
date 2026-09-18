@@ -17,7 +17,7 @@ export default function PropertyManager({ manager }) {
           Contact
         </p>
         <h3 className="mt-2 font-serif text-xl">
-          Speak with the manager
+          Speak with the property manager
         </h3>
         <p className="mt-1 text-xs text-muted-foreground">
           Ask about availability, pricing, or schedule a viewing.
