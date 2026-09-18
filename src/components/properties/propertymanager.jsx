@@ -53,6 +53,8 @@ export default function PropertyManager({ manager }) {
         )}
       </div>
 
+      <p className="mt-1 text-sm text-red-500">Disclaimer: Every property should be verified before making payment </p>
+
       {manager.preferred_phone && (
         <div className="pt-3 border-t border-border">
           <p className="text-xs text-muted-foreground">Direct line</p>
