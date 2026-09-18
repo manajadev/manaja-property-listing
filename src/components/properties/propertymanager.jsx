@@ -53,10 +53,9 @@ export default function PropertyManager({ manager }) {
         )}
       </div>
 
-      <p className="mt-1 text-sm text-red-500">Disclaimer: Every property should be verified before making payment </p>
-
-      {manager.preferred_phone && (
-        <div className="pt-3 border-t border-border">
+      <div className="flex gap-6 border-t border-border pt-3 items-center">
+        {manager.preferred_phone && (
+        <div>
           <p className="text-xs text-muted-foreground">Direct line</p>
           <p className="text-sm font-medium mt-0.5">
             {manager.preferred_phone}
@@ -72,7 +71,11 @@ export default function PropertyManager({ manager }) {
           </p>
         </div>
       )}
+      </div>
+
+      <p className="mt-1 text-sm"><span className="font-bold uppercase text-sm ">Please Note</span>: Kindly verify property before making any payment.</p>
     </aside>
+    
   );
 }
 
