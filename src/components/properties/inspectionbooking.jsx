@@ -64,12 +64,12 @@ export default function InspectionBooking({
   };
 
   return (
-    <div className="space-y-0">
+    <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between pb-6 border-b border-border">
+      <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-foreground">Book Property Inspection</h2>
-          <p className="text-sm text-muted-foreground mt-1">{property.name}</p>
+          <h2 className="text-xl font-semibold">Property Inspection</h2>
+          <p className="text-sm text-muted-foreground">{property.name}</p>
         </div>
         <button
           onClick={onClose}
@@ -78,8 +78,8 @@ export default function InspectionBooking({
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            width="24"
-            height="24"
+            width="20"
+            height="20"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -95,14 +95,33 @@ export default function InspectionBooking({
 
       {/* Error message */}
       {error && (
-        <div className="text-sm text-destructive bg-destructive/10 p-4 rounded-lg">
+        <div className="text-sm text-destructive bg-destructive/10 p-3 rounded-lg">
           {error}
         </div>
       )}
 
       {/* Step content */}
       {step === 'form' && (
-        <div className="pt-6 space-y-6">
+        <div className="space-y-4">
+          {/* Property info */}
+          <div className="bg-muted/50 rounded-lg p-4 space-y-2">
+            <h4 className="font-medium text-sm">Property Details</h4>
+            <div className="text-sm space-y-1">
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Property:</span>
+                <span>{property.name}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Type:</span>
+                <span>{property.property_type}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Location:</span>
+                <span className="text-right">{[property.house_number, property.address, property.state].filter(Boolean).join(', ')}</span>
+              </div>
+            </div>
+          </div>
+
           <BookingForm
             onSubmit={handleFormSubmit}
             onCancel={onClose}
@@ -112,12 +131,10 @@ export default function InspectionBooking({
       )}
 
       {step === 'confirmation' && completedBooking && (
-        <div className="pt-6">
-          <BookingConfirmation
-            booking={completedBooking}
-            onClose={onClose}
-          />
-        </div>
+        <BookingConfirmation
+          booking={completedBooking}
+          onClose={onClose}
+        />
       )}
     </div>
   );
