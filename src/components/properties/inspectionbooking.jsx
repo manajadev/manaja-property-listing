@@ -36,8 +36,9 @@ export default function InspectionBooking({
       };
 
       // Call the backend API
+      const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.API_BASE_URL || 'https://manaja-backend.onrender.com';
       const response = await fetch(
-        `https://manaja-backend.onrender.com/listings/${property.id}/bookings`,
+        `${API_BASE}/listings/${property.id}/bookings`,
         {
           method: 'POST',
           headers: {
