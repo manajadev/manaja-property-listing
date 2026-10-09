@@ -1,4 +1,11 @@
-export default function PropertyManager({ manager }) {
+"use client";
+
+import { useState } from "react";
+import InspectionBooking from "./inspectionbooking";
+
+export default function PropertyManager({ manager, property }) {
+  const [showBookingModal, setShowBookingModal] = useState(false);
+
   const hasContact =
     manager &&
     (manager.preferred_phone || manager.preferred_email);
@@ -8,74 +15,101 @@ export default function PropertyManager({ manager }) {
   }
 
   return (
-    <aside
-      className="rounded-2xl border border-border bg-card
-                 p-6 space-y-5"
-    >
-      <div>
-        <p className="text-xs uppercase tracking-[0.15em] text-champagne">
-          Contact
-        </p>
-        <h3 className="mt-2 font-serif text-xl">
-          Speak with the property manager
-        </h3>
-        <p className="mt-1 text-xs text-muted-foreground">
-          Ask about availability, pricing, or schedule a viewing.
-        </p>
-      </div>
+    <>
+      <aside
+        className="rounded-2xl border border-border bg-card
+                   p-6 space-y-5"
+      >
+        <div>
+          <p className="text-xs uppercase tracking-[0.15em] text-champagne">
+            Contact
+          </p>
+          <h3 className="mt-2 font-serif text-xl">
+            Speak with the property manager
+          </h3>
+          <p className="mt-1 text-xs text-muted-foreground">
+            Ask about availability, pricing, or schedule a viewing.
+          </p>
+        </div>
 
-      <div className="space-y-2.5">
-        {manager.preferred_phone && (
-          <a
-            href={`tel:${manager.preferred_phone}`}
+        <div className="space-y-2.5">
+          <button
+            onClick={() => setShowBookingModal(true)}
             className="w-full inline-flex items-center justify-center gap-2
                        rounded-xl
                        bg-primary text-primary-foreground
                        px-4 py-3 text-sm font-medium
                        hover:opacity-90 transition-opacity"
           >
-            <PhoneIcon />
-            Call
-          </a>
+            <CalendarIcon />
+            Book Inspection
+          </button>
+          
+          {manager.preferred_phone && (
+            <a
+              href={`tel:${manager.preferred_phone}`}
+              className="w-full inline-flex items-center justify-center gap-2
+                         rounded-xl
+                         border border-border
+                         px-4 py-3 text-sm font-medium
+                         hover:bg-muted transition-colors"
+            >
+              <PhoneIcon />
+              Call
+            </a>
+          )}
+          {manager.preferred_email && (
+            <a
+              href={`mailto:${manager.preferred_email}`}
+              className="w-full inline-flex items-center justify-center gap-2
+                         rounded-xl
+                         border border-border
+                         px-4 py-3 text-sm font-medium
+                         hover:bg-muted transition-colors"
+            >
+              <MailIcon />
+              Email
+            </a>
+          )}
+        </div>
+
+        <div className="flex gap-6 border-t border-border pt-3 items-center">
+          {manager.preferred_phone && (
+          <div>
+            <p className="text-xs text-muted-foreground">Direct line</p>
+            <p className="text-sm font-medium mt-0.5">
+              {manager.preferred_phone}
+            </p>
+          </div>
         )}
+
         {manager.preferred_email && (
-          <a
-            href={`mailto:${manager.preferred_email}`}
-            className="w-full inline-flex items-center justify-center gap-2
-                       rounded-xl
-                       border border-border
-                       px-4 py-3 text-sm font-medium
-                       hover:bg-muted transition-colors"
-          >
-            <MailIcon />
-            Email
-          </a>
+          <div>
+            <p className="text-xs text-muted-foreground">Email</p>
+            <p className="text-sm font-medium mt-0.5 break-all">
+              {manager.preferred_email}
+            </p>
+          </div>
         )}
-      </div>
+        </div>
 
-      <div className="flex gap-6 border-t border-border pt-3 items-center">
-        {manager.preferred_phone && (
-        <div>
-          <p className="text-xs text-muted-foreground">Direct line</p>
-          <p className="text-sm font-medium mt-0.5">
-            {manager.preferred_phone}
-          </p>
+        <p className="mt-1 text-sm"><span className="font-bold uppercase text-sm ">Please Note</span>: Kindly verify property before making any payment.</p>
+      </aside>
+
+      {/* Booking Modal */}
+      {showBookingModal && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-background rounded-2xl shadow-xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <InspectionBooking
+                property={property}
+                onClose={() => setShowBookingModal(false)}
+              />
+            </div>
+          </div>
         </div>
       )}
-
-      {manager.preferred_email && (
-        <div>
-          <p className="text-xs text-muted-foreground">Email</p>
-          <p className="text-sm font-medium mt-0.5 break-all">
-            {manager.preferred_email}
-          </p>
-        </div>
-      )}
-      </div>
-
-      <p className="mt-1 text-sm"><span className="font-bold uppercase text-sm ">Please Note</span>: Kindly verify property before making any payment.</p>
-    </aside>
-    
+    </>
   );
 }
 
@@ -113,6 +147,17 @@ function MailIcon() {
     <Icon>
       <rect x="2" y="4" width="20" height="16" rx="2" />
       <path d="m22 7-10 6L2 7" />
+    </Icon>
+  );
+}
+
+function CalendarIcon() {
+  return (
+    <Icon size={15}>
+      <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+      <line x1="16" y1="2" x2="16" y2="6" />
+      <line x1="8" y1="2" x2="8" y2="6" />
+      <line x1="3" y1="10" x2="21" y2="10" />
     </Icon>
   );
 }

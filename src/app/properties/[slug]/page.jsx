@@ -93,6 +93,12 @@ export default async function PropertyDetailPage({ params }) {
     ...(listing.property_exterior_images || []),
   ];
 
+  // Add slug to listing for booking system
+  const propertyWithSlug = {
+    ...listing,
+    slug
+  };
+
   // Related: same category, excluding current, cap at 4 for the sidebar
   const related = all
     .filter(
@@ -135,7 +141,7 @@ export default async function PropertyDetailPage({ params }) {
 
           {/* Sidebar — sticky on desktop */}
           <div className="lg:sticky lg:top-24 lg:self-start space-y-6">
-            <PropertyManager manager={listing.manager} />
+            <PropertyManager manager={listing.manager} property={propertyWithSlug} />
             <RelatedProperties listings={related} />
           </div>
         </div>
