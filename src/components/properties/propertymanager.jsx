@@ -98,8 +98,8 @@ export default function PropertyManager({ manager, property }) {
 
       {/* Booking Modal */}
       {showBookingModal && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-4">
-          <div className="bg-background rounded-2xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto my-16">
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[9999] p-4 pt-24">
+          <div className="bg-background rounded-2xl shadow-2xl max-w-lg w-full max-h-[70vh] overflow-y-auto">
             <div className="p-8">
               <InspectionBooking
                 property={property}
