@@ -124,7 +124,7 @@ export default function InspectionBooking({
 
           <BookingForm
             onSubmit={handleFormSubmit}
-            onCancel={resetBooking}
+            onCancel={onClose}
             isSubmitting={isSubmitting}
           />
         </div>
