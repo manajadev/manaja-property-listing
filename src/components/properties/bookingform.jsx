@@ -125,7 +125,7 @@ export default function BookingForm({
   return (
     <form onSubmit={handleSubmit} className="space-y-5">
       <div>
-        <label htmlFor="guest_name" className="block text-sm font-semibold mb-2 text-foreground">
+        <label htmlFor="guest_name" className="block text-sm font-medium mb-2.5 text-foreground">
           Full Name
         </label>
         <input
@@ -136,10 +136,10 @@ export default function BookingForm({
           onChange={handleChange}
           onBlur={handleBlur}
           placeholder="Enter your full name"
-          className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${
+          className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all ${
             errors.guest_name && touched.guest_name 
-              ? 'border-destructive ring-2 ring-destructive' 
-              : 'border-border'
+              ? 'border-destructive ring-2 ring-destructive/20' 
+              : 'border-border hover:border-primary/30'
           }`}
           disabled={isSubmitting}
         />
@@ -149,7 +149,7 @@ export default function BookingForm({
       </div>
 
       <div>
-        <label htmlFor="guest_phone" className="block text-sm font-semibold mb-2 text-foreground">
+        <label htmlFor="guest_phone" className="block text-sm font-medium mb-2.5 text-foreground">
           Phone Number
         </label>
         <input
@@ -160,10 +160,10 @@ export default function BookingForm({
           onChange={handleChange}
           onBlur={handleBlur}
           placeholder="+234 XXX XXX XXXX"
-          className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${
+          className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all ${
             errors.guest_phone && touched.guest_phone 
-              ? 'border-destructive ring-2 ring-destructive' 
-              : 'border-border'
+              ? 'border-destructive ring-2 ring-destructive/20' 
+              : 'border-border hover:border-primary/30'
           }`}
           disabled={isSubmitting}
         />
@@ -173,7 +173,7 @@ export default function BookingForm({
       </div>
 
       <div>
-        <label htmlFor="guest_email" className="block text-sm font-semibold mb-2 text-foreground">
+        <label htmlFor="guest_email" className="block text-sm font-medium mb-2.5 text-foreground">
           Email Address
         </label>
         <input
@@ -184,10 +184,10 @@ export default function BookingForm({
           onChange={handleChange}
           onBlur={handleBlur}
           placeholder="your.email@example.com"
-          className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${
+          className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all ${
             errors.guest_email && touched.guest_email 
-              ? 'border-destructive ring-2 ring-destructive' 
-              : 'border-border'
+              ? 'border-destructive ring-2 ring-destructive/20' 
+              : 'border-border hover:border-primary/30'
           }`}
           disabled={isSubmitting}
         />
@@ -197,7 +197,7 @@ export default function BookingForm({
       </div>
 
       <div>
-        <label htmlFor="preferred_visit_at" className="block text-sm font-semibold mb-2 text-foreground">
+        <label htmlFor="preferred_visit_at" className="block text-sm font-medium mb-2.5 text-foreground">
           Preferred Visit Date & Time
         </label>
         <input
@@ -208,10 +208,10 @@ export default function BookingForm({
           onChange={handleChange}
           onBlur={handleBlur}
           min={new Date().toISOString().slice(0, 16)}
-          className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all ${
+          className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all ${
             errors.preferred_visit_at && touched.preferred_visit_at 
-              ? 'border-destructive ring-2 ring-destructive' 
-              : 'border-border'
+              ? 'border-destructive ring-2 ring-destructive/20' 
+              : 'border-border hover:border-primary/30'
           }`}
           disabled={isSubmitting}
         />
@@ -221,7 +221,7 @@ export default function BookingForm({
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-semibold mb-2 text-foreground">
+        <label htmlFor="message" className="block text-sm font-medium mb-2.5 text-foreground">
           Additional Message
         </label>
         <textarea
@@ -233,10 +233,10 @@ export default function BookingForm({
           placeholder="Any specific requirements or questions..."
           rows={4}
           maxLength={500}
-          className={`w-full px-4 py-3 border rounded-lg bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none ${
+          className={`w-full px-4 py-3 border rounded-xl bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all resize-none ${
             errors.message && touched.message 
-              ? 'border-destructive ring-2 ring-destructive' 
-              : 'border-border'
+              ? 'border-destructive ring-2 ring-destructive/20' 
+              : 'border-border hover:border-primary/30'
           }`}
           disabled={isSubmitting}
         />
@@ -250,19 +250,19 @@ export default function BookingForm({
         </div>
       </div>
 
-      <div className="flex gap-3 pt-2">
+      <div className="flex gap-4 pt-4">
         <button
           type="button"
           onClick={onCancel}
           disabled={isSubmitting}
-          className="flex-1 px-6 py-3 border-2 border-border rounded-lg hover:bg-muted transition-colors disabled:opacity-50 font-medium"
+          className="flex-1 px-6 py-3 border-2 border-border rounded-xl hover:bg-muted transition-colors disabled:opacity-50 font-medium"
         >
           Cancel
         </button>
         <button
           type="submit"
           disabled={isSubmitting}
-          className="flex-1 px-6 py-3 bg-primary text-primary-foreground rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50 font-medium"
+          className="flex-1 px-6 py-3 bg-primary text-primary-foreground rounded-xl hover:opacity-90 transition-opacity disabled:opacity-50 font-medium shadow-lg shadow-primary/20"
         >
           {isSubmitting ? 'Booking...' : 'Book Inspection'}
         </button>
