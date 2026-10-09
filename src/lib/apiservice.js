@@ -1,4 +1,5 @@
-const API_BASE = "https://manaja-backend.onrender.com";
+const RAW_BASE = process.env.API_BASE_URL;
+const API_BASE = RAW_BASE ? RAW_BASE.replace(/\/+$/, "") : null;
 /**
  * Fetch public property listings.
  *
