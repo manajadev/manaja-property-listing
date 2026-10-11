@@ -62,6 +62,12 @@ export default async function PropertyDetailPage({ params }) {
 
   try {
     all = await fetchListings({ limit: 100, offset: 0 });
+    console.log('=== LISTINGS FROM API ===');
+    console.log('Total listings:', all.length);
+    if (all.length > 0) {
+      console.log('First listing keys:', Object.keys(all[0]));
+      console.log('First listing sample:', JSON.stringify(all[0], null, 2));
+    }
     listing = all.find((l) => listingSlug(l) === slug) || null;
   } catch (e) {
     error = e.message || "Failed to load listing";

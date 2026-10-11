@@ -6,6 +6,8 @@ import InspectionBooking from "./inspectionbooking";
 export default function PropertyManager({ manager, property }) {
   console.log('PropertyManager - property object:', property);
   console.log('PropertyManager - property.id:', property?.id);
+  console.log('PropertyManager - ALL property keys:', Object.keys(property || {}));
+  console.log('PropertyManager - Full property JSON:', JSON.stringify(property, null, 2));
 
   const [showBookingModal, setShowBookingModal] = useState(false);
 
