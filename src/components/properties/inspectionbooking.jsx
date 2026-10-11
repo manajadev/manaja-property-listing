@@ -25,11 +25,19 @@ export default function InspectionBooking({
 
   // Handle booking form submission
   const handleFormSubmit = async (formData) => {
+    console.log('=== BOOKING SUBMISSION START ===');
+    console.log('Full property object:', property);
+    console.log('Property ID:', property?.id);
+    console.log('Property name:', property?.name);
+    console.log('Form data:', formData);
+
     setIsSubmitting(true);
     setError('');
 
     // Check if property has an ID
     if (!property || !property.id) {
+      console.error('PROPERTY VALIDATION FAILED - property:', property);
+      console.error('PROPERTY VALIDATION FAILED - property.id:', property?.id);
       setError('Property information is missing. Please try again.');
       setIsSubmitting(false);
       return;
@@ -45,31 +53,40 @@ export default function InspectionBooking({
         message: formData.message || ''
       };
 
+      console.log('Booking data to send:', bookingData);
+
       // Call the backend API
       const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.API_BASE_URL || 'https://manajastagingv2.up.railway.app';
-      const response = await fetch(
-        `${API_BASE}/listings/${property.id}/bookings`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(bookingData),
-        }
-      );
+      const bookingUrl = `${API_BASE}/listings/${property.id}/bookings`;
+      console.log('Booking URL:', bookingUrl);
+
+      const response = await fetch(bookingUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
+      });
+
+      console.log('Response status:', response.status);
+      console.log('Response ok:', response.ok);
 
       if (!response.ok) {
         const errorData = await response.json();
+        console.error('API Error:', errorData);
         throw new Error(errorData.detail?.[0]?.msg || 'Failed to create booking');
       }
 
       const result = await response.json();
+      console.log('Booking success:', result);
       setCompletedBooking(result);
       setStep('confirmation');
     } catch (err) {
+      console.error('Booking error:', err);
       setError(err.message || 'An unexpected error occurred');
     } finally {
       setIsSubmitting(false);
+      console.log('=== BOOKING SUBMISSION END ===');
     }
   };
 
