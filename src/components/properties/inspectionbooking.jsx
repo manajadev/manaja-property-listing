@@ -25,6 +25,13 @@ export default function InspectionBooking({
     setIsSubmitting(true);
     setError('');
 
+    // Check if property has an ID
+    if (!property || !property.id) {
+      setError('Property information is missing. Please try again.');
+      setIsSubmitting(false);
+      return;
+    }
+
     try {
       // Format the datetime to ISO format
       const bookingData = {
@@ -36,7 +43,7 @@ export default function InspectionBooking({
       };
 
       // Call the backend API
-      const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.API_BASE_URL || 'https://manaja-backend.onrender.com';
+      const API_BASE = process.env.NEXT_PUBLIC_API_BASE_URL || process.env.API_BASE_URL || 'https://manajastagingv2.up.railway.app';
       const response = await fetch(
         `${API_BASE}/listings/${property.id}/bookings`,
         {
