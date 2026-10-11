@@ -4,10 +4,13 @@ import { useState } from 'react';
 import BookingForm from './bookingform';
 import BookingConfirmation from './bookingconfirmation';
 
-export default function InspectionBooking({ 
-  property, 
-  onClose 
+export default function InspectionBooking({
+  property,
+  onClose
 }) {
+  console.log('InspectionBooking - property object:', property);
+  console.log('InspectionBooking - property.id:', property?.id);
+
   const [step, setStep] = useState('form'); // form, confirmation
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [completedBooking, setCompletedBooking] = useState(null);

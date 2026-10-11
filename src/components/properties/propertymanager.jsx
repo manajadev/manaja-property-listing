@@ -4,6 +4,9 @@ import { useState } from "react";
 import InspectionBooking from "./inspectionbooking";
 
 export default function PropertyManager({ manager, property }) {
+  console.log('PropertyManager - property object:', property);
+  console.log('PropertyManager - property.id:', property?.id);
+
   const [showBookingModal, setShowBookingModal] = useState(false);
 
   const hasContact =
