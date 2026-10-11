@@ -24,18 +24,16 @@ export default function BookingForm({
     switch (name) {
       case "guest_name":
         if (!value.trim()) return "Name is required";
-        if (value.trim().length < 2) {
-          return "Name must be at least 2 characters";
+        if (value.trim().length < 1 || value.trim().length > 200) {
+          return "Name must be between 1 and 200 characters";
         }
         return "";
 
       case "guest_phone": {
         if (!value.trim()) return "Phone number is required";
-
-        const digits = value.replace(/\D/g, "");
-
-        if (digits.length < 10 || digits.length > 15) {
-          return "Please enter a valid phone number";
+        const trimmedLength = value.trim().length;
+        if (trimmedLength < 3 || trimmedLength > 50) {
+          return "Phone number must be between 3 and 50 characters";
         }
         return "";
       }
@@ -48,16 +46,15 @@ export default function BookingForm({
         return "";
 
       case "preferred_visit_at":
-        if (!value) return "Preferred visit date is required";
-
-        if (new Date(value).getTime() <= Date.now()) {
+        // Optional field - no validation if empty
+        if (value && new Date(value).getTime() <= Date.now()) {
           return "Please choose a future date and time";
         }
         return "";
 
       case "message":
-        if (value.length > 500) {
-          return "Message must be 500 characters or less";
+        if (value.length > 2000) {
+          return "Message must be 2000 characters or less";
         }
         return "";
 
@@ -69,13 +66,30 @@ export default function BookingForm({
   const validateForm = () => {
     const newErrors = {};
 
-    Object.keys(formData).forEach((key) => {
+    // Only validate required fields
+    const requiredFields = ['guest_name', 'guest_email', 'guest_phone'];
+    
+    requiredFields.forEach((key) => {
       const error = validateField(key, formData[key]);
-
       if (error) {
         newErrors[key] = error;
       }
     });
+
+    // Validate optional fields only if they have values
+    if (formData.preferred_visit_at) {
+      const error = validateField('preferred_visit_at', formData.preferred_visit_at);
+      if (error) {
+        newErrors['preferred_visit_at'] = error;
+      }
+    }
+
+    if (formData.message) {
+      const error = validateField('message', formData.message);
+      if (error) {
+        newErrors['message'] = error;
+      }
+    }
 
     setErrors(newErrors);
 
@@ -234,7 +248,9 @@ export default function BookingForm({
       <div>
         <label htmlFor="preferred_visit_at" className={labelClass}>
           Preferred Visit Date &amp; Time{" "}
-          <span className="text-primary">*</span>
+          <span className="font-normal normal-case tracking-normal text-muted-foreground">
+            (Optional)
+          </span>
         </label>
 
         <input
@@ -269,7 +285,7 @@ export default function BookingForm({
           onBlur={handleBlur}
           placeholder="Any specific requirements or questions?"
           rows={3}
-          maxLength={500}
+          maxLength={2000}
           className={getInputClass("message", "resize-none")}
           disabled={isSubmitting}
         />
@@ -278,7 +294,7 @@ export default function BookingForm({
           <div>{renderError("message")}</div>
 
           <span className="ml-auto shrink-0 text-xs tabular-nums text-muted-foreground">
-            {formData.message.length}/500
+            {formData.message.length}/2000
           </span>
         </div>
       </div>
