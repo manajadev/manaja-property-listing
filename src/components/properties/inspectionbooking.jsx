@@ -26,13 +26,6 @@ export default function InspectionBooking({
     setIsSubmitting(true);
     setError('');
 
-    // Check if property has an ID
-    if (!property || !property.id) {
-      setError('Property information is missing. Please try again.');
-      setIsSubmitting(false);
-      return;
-    }
-
     try {
       // Format the datetime to ISO format
       const bookingData = {
@@ -43,11 +36,18 @@ export default function InspectionBooking({
         message: formData.message || null
       };
 
+      // Use property.id if available, otherwise property.slug as fallback
+      const propertyId = property.id || property.slug;
+
+      console.log('Attempting booking with propertyId:', propertyId);
+      console.log('Booking data:', bookingData);
+
       // Call the backend API using the API service
-      const result = await createListingBooking(property.id, bookingData);
+      const result = await createListingBooking(propertyId, bookingData);
       setCompletedBooking(result);
       setStep('confirmation');
     } catch (err) {
+      console.error('Booking error:', err);
       setError(err.message || 'An unexpected error occurred');
     } finally {
       setIsSubmitting(false);
