@@ -62,6 +62,9 @@ export default async function PropertyDetailPage({ params }) {
 
   try {
     all = await fetchListings({ limit: 100, offset: 0 });
+    console.log('[page.jsx] fetchListings raw response:', all);
+    console.log('[page.jsx] first item:', all?.[0]);
+    console.log('[page.jsx] first item keys:', all?.[0] ? Object.keys(all[0]) : 'no items');
     listing = all.find((l) => listingSlug(l) === slug) || null;
   } catch (e) {
     error = e.message || "Failed to load listing";
@@ -98,6 +101,8 @@ export default async function PropertyDetailPage({ params }) {
     ...listing,
     slug
   };
+  console.log('[page.jsx] propertyWithSlug:', propertyWithSlug);
+  console.log('[page.jsx] propertyWithSlug.id:', propertyWithSlug.id);
 
   // Related: same category, excluding current, cap at 4 for the sidebar
   const related = all
