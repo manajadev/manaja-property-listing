@@ -2,10 +2,9 @@
 
 import { useState } from "react";
 import InspectionBooking from "./inspectionbooking";
+import PropertyDebug from "./propertydebug";
 
 export default function PropertyManager({ manager, property }) {
-  console.log('[propertymanager] received property:', property);
-  console.log('[propertymanager] received property.id:', property?.id);
   const [showBookingModal, setShowBookingModal] = useState(false);
 
   const hasContact =
@@ -18,6 +17,7 @@ export default function PropertyManager({ manager, property }) {
 
   return (
     <>
+      <PropertyDebug property={property} />
       <aside
         className="rounded-2xl border border-border bg-card
                    p-6 space-y-5"
