@@ -26,6 +26,10 @@ export default function InspectionBooking({
     setIsSubmitting(true);
     setError('');
 
+    console.log('[inspectionbooking] property:', property);
+    console.log('[inspectionbooking] property.id:', property?.id);
+    console.log('[inspectionbooking] property.slug:', property?.slug);
+
     try {
       // Format the datetime to ISO format
       const bookingData = {
