@@ -36,8 +36,10 @@ export default function InspectionBooking({
         message: formData.message || null
       };
 
-      // Use property.id if available, otherwise property.slug as fallback
-      const propertyId = property.id || property.slug;
+      const propertyId = property.id;
+      if (!propertyId) {
+        throw new Error('Property ID is missing — cannot create booking');
+      }
 
       console.log('Attempting booking with propertyId:', propertyId);
       console.log('Booking data:', bookingData);
