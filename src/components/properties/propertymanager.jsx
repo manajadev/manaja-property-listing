@@ -17,7 +17,6 @@ export default function PropertyManager({ manager, property }) {
 
   return (
     <>
-      <PropertyDebug property={property} />
       <aside
         className="rounded-2xl border border-border bg-card
                    p-6 space-y-5"
