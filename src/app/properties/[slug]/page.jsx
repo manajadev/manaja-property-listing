@@ -62,12 +62,7 @@ export default async function PropertyDetailPage({ params }) {
 
   try {
     all = await fetchListings({ limit: 100, offset: 0 });
-    // Server-side log (will appear in Vercel logs, not browser)
-    console.log('[SERVER page.jsx] all[0] keys:', all?.[0] ? Object.keys(all[0]) : 'empty');
-    console.log('[SERVER page.jsx] all[0].id:', all?.[0]?.id);
     listing = all.find((l) => listingSlug(l) === slug) || null;
-    console.log('[SERVER page.jsx] listing.id:', listing?.id);
-    console.log('[SERVER page.jsx] listing keys:', listing ? Object.keys(listing) : 'none');
   } catch (e) {
     error = e.message || "Failed to load listing";
   }

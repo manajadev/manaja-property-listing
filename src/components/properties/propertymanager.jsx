@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import InspectionBooking from "./inspectionbooking";
-import PropertyDebug from "./propertydebug";
 
 export default function PropertyManager({ manager, property }) {
   const [showBookingModal, setShowBookingModal] = useState(false);
