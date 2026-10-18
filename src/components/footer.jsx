@@ -95,7 +95,7 @@ export default function Footer({ listings = [] }) {
                       </p>
                       <p className="text-xs text-muted-foreground mt-0.5">
                         {formatPrice(l.price)}
-                        {l.property_status === "rent" && " / month"}
+                        {l.property_status === "rent" && " / year"}
                       </p>
                     </div>
                   </li>

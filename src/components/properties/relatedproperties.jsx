@@ -66,6 +66,11 @@ export default function RelatedProperties({ listings = [] }) {
                   </p>
                   <p className="text-sm font-bold mt-1">
                     {formatPrice(l.price)}
+                    {l.property_status === "rent" && (
+                      <span className="text-xs font-normal text-muted-foreground">
+                        {" "}/ year
+                      </span>
+                    )}
                   </p>
                 </div>
               </Link>

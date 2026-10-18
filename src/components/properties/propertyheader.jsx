@@ -62,7 +62,7 @@ export default function PropertyHeader({ listing, categoryLabel, categorySlug })
             {formatPrice(listing.price)}
             {isRent && (
               <span className="text-base font-normal text-muted-foreground">
-                {" "}/ month
+                {" "}/ year
               </span>
             )}
           </p>
